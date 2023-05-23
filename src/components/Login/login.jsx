@@ -1,11 +1,41 @@
 import { useState } from "react";
-import { LoginPage,LoginForm,Boximagem,LoginInputs} from "./styledLogin";
+import { LoginPage, LoginForm, Boximagem, LoginInputs } from "./styledLogin";
+import { api } from "../../service";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 // import { Link, useNavigate } from "react-router-dom";
 
 export function Login() {
   const [apikey, setApikey] = useState("");
+  const navigate = useNavigate();
 
-  function handleLogin() {}
+  async function handleLogin(event) {
+    event.preventDefault();
+    const apiKey = {
+      apikey,
+    };
+
+    api
+      .get("status", {
+        headers: {
+          "x-rapidapi-key": apiKey.apikey,
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        if (data.errors.length == 0) {
+          localStorage.setItem(
+            "authorization",
+            JSON.stringify(apiKey.apikey)
+          )
+          navigate("/dashboard");
+        } else {
+          toast.error("Chave incorreta");
+        }
+      })
+    
+  }
 
   return (
     <LoginPage>
@@ -23,6 +53,7 @@ export function Login() {
             name="apikey"
             id="apikeyinput"
             placeholder="Digite sua apikey"
+            required
             value={apikey}
             onChange={(event) => setApikey(event.target.value)}
           />
@@ -30,6 +61,7 @@ export function Login() {
           <button>Enviar</button>
         </LoginForm>
       </LoginInputs>
+      <ToastContainer />
     </LoginPage>
   );
 }
