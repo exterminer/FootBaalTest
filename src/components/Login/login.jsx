@@ -33,10 +33,8 @@ export function Login() {
         } else {
           toast.error("Chave incorreta");
         }
-      })
-    
+      }) 
   }
-
   return (
     <LoginPage>
       <Boximagem>
