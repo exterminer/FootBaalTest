@@ -1,8 +1,19 @@
+import { StyledNav,StyledButton } from "./styledDash";
+import { useNavigate } from "react-router-dom";
+import {MdLogout} from "react-icons/md"
+
 export function DashBoard() {
+  const navigate = useNavigate();
+  function handlelogOut() {
+    localStorage.clear();
+    navigate("/");
+  }
   return (
-    <div>
-      <h2>Dash ADIHJQSBNLS</h2>
-      <h3>dasassadadasda</h3>
-    </div>
+    <StyledNav>
+      <h2>Clube da </h2>
+      <StyledButton>
+      <button onClick={handlelogOut}>Sair <MdLogout/></button>
+      </StyledButton>
+    </StyledNav>
   );
 }
