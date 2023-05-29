@@ -1,4 +1,4 @@
-import { StyledNav,StyledButton } from "./styledDash";
+import { StyledNav,StyledButton, } from "./styledDash";
 import { useNavigate } from "react-router-dom";
 import {MdLogout} from "react-icons/md"
 

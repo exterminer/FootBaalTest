@@ -94,3 +94,4 @@ export const LoginInputs = styled.div`
     }
   }
 `;
+
